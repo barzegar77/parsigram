@@ -5,6 +5,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import ActivityDetails from "../Details/ActivityDetails";
 import ActivityForm from "../Form/ActivityForm";
+import ActivityFilters from "./ActivityFilters";
 import ActivityList from "./ActivityList";
 
 
@@ -27,7 +28,7 @@ if(activityStore.loadingInitial) return<LoadingComponent content='بارگزار
               <ActivityList/>
             </Grid.Column>
             <Grid.Column width='6'>
-                <h2>فیلترینگ</h2>
+              <ActivityFilters />
             </Grid.Column>
         </Grid>
     )
