@@ -1,4 +1,5 @@
 using Domin;
+using FluentValidation;
 using MediatR;
 using Persistent;
 
@@ -10,6 +11,13 @@ namespace Application.Activities
         {
             public Activity Activity { get; set; }
 
+        }
+
+        public class CommandValidator : AbstractValidator<Command>{
+            public CommandValidator()
+            {
+                RuleFor( x => x.Activity).SetValidator(new ActivityValidator());
+            }
         }
 
 

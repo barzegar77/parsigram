@@ -1,3 +1,4 @@
+using System.Runtime.Intrinsics.X86;
 using Application.Activities;
 using Domin;
 using MediatR;
@@ -19,16 +20,18 @@ namespace API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivity(Guid id)
+        public async Task<IActionResult> GetActivity(Guid id)
         {
-            return await Mediator.Send(new Details.Query{Id = id});
+            var result = await Mediator.Send(new Details.Query{Id = id});
+            return HandleResult(result);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> CreateActivity ([FromBody]Activity activity)
         {
-            return Ok(await Mediator.Send(new Create.Command{Activity = activity}));
+ return Ok(await Mediator.Send(new Create.Command{Activity = activity}));
+           
         }
 
 

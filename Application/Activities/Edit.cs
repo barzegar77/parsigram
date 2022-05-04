@@ -1,5 +1,6 @@
 using AutoMapper;
 using Domin;
+using FluentValidation;
 using MediatR;
 using Persistent;
 
@@ -22,6 +23,14 @@ namespace Application.Activities
                 _mapper = mapper;
                 _context = context;
             }
+
+
+   public class CommandValidator : AbstractValidator<Command>{
+            public CommandValidator()
+            {
+                RuleFor( x => x.Activity).SetValidator(new ActivityValidator());
+            }
+        }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
