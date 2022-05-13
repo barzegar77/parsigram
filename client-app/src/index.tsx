@@ -4,8 +4,12 @@ import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.min.css';
 import "react-calendar/dist/Calendar.css";
 import './app/layout/styles.css';
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>

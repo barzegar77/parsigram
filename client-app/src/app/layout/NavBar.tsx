@@ -14,6 +14,7 @@ export default function NavBar(){
                     پارسی گرام
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/activities' name='فعالیت های اخیر' />
+                <Menu.Item as={NavLink} to='/errors' name='ارورها' />
                 <Menu.Item as={NavLink} to='/createActivity'>
                     <Button positive content='ایجاد فعالیت'></Button>
                 </Menu.Item>
