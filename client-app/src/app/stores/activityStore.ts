@@ -2,6 +2,7 @@ import { action, makeAutoObservable, makeObservable, observable, runInAction } f
 import agent from "../api/agent";
 import { Activity } from "../models/activity";
 import {v4 as uuid} from 'uuid';
+import {format} from 'date-fns';
 
 export default class ActivityStore{
 
@@ -18,13 +19,13 @@ export default class ActivityStore{
 
     get activitiesByDate(){
         return Array.from(this.activityRegistry.values()).sort((a,b)=>
-        Date.parse(a.date) - Date.parse(b.date));
+        a.date!.getTime() - b.date!.getTime());
     }
 
     get groupActivities(){
         return Object.entries(
             this.activitiesByDate.reduce( (activities, activity) =>{
-                const date = activity.date;
+                const date = format(activity.date!, 'dd MMM yyy')
                 activities[date] = activities[date] ? [...activities[date] , activity] : [activity];
                 return activities;
             },{} as {[key:string] : Activity[]})
@@ -70,7 +71,7 @@ export default class ActivityStore{
 
 
     private setActivity = (activity : Activity) =>{
-        activity.date = activity.date.split('T')[0];
+        activity.date = new Date (activity.date!);
         this.activityRegistry.set(activity.id, activity);
     }
 
